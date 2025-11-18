@@ -1,0 +1,7 @@
+services:
+  services1:
+    container_name: nginx-example
+    image: nginx:latest
+  services2:
+    container_name: mongo-example
+    image: mongo:latest

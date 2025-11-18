@@ -1,0 +1,32 @@
+
+volumes:
+  mongo-data1:
+    name: mongo-data1
+  mongo-data2:
+    name: mongo-data2
+
+services:
+  mongo-db:
+    container_name: mongo-example
+    image: mongo:latest
+    ports:
+      - "6000:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin123
+    volumes:
+      - mongo-data1:/data/db
+  mongo-backup:
+    container_name: mongo-backup
+    image: mongo:latest
+    ports:
+      - "7000:27017"
+    depends_on:
+      - mongo-db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin123
+    volumes:
+      - mongo-data2:/data/db
+    command: >
+      bash -c "mongodump --host mongo-db --port 27017 -u admin -p admin123 --authenticationDatabase admin --out /backup/$(date +%Y%m%d_%H%M%S) && sleep infinity"
