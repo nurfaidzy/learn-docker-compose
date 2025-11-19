@@ -1,0 +1,17 @@
+services:
+  app:
+    container_name: express-js-healthcheck
+    build:
+      context: "./"
+      dockerfile: "./dockerfile"
+    image: express-js-healthcheck-image:1.0.0
+    ports:
+      - "5000:3000"
+    environment:
+      - PORT=3000
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 5s
+      retries: 1

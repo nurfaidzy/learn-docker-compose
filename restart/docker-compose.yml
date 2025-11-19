@@ -1,0 +1,30 @@
+services:
+  mongo-db:
+    container_name: mongo-example
+    image: mongo:latest
+    ports:
+      - "6000:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+    networks:
+      - mongo-connection
+      
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - "6100:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://admin:admin123@mongo-db:27017/
+      ME_CONFIG_BASICAUTH_ENABLED: true
+      ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
+      ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
+    networks:
+      - mongo-connection
+
+networks:
+  mongo-connection:
+    name: mongo-network
+    driver: bridge

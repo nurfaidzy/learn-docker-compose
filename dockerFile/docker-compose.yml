@@ -1,0 +1,11 @@
+services:
+  app:
+    container_name: express-js-container
+    build:
+      context: "./"
+      dockerfile: "./dockerfile"
+    image: express-js-image:1.0.2
+    ports:
+      - "5000:3000"
+    environment:
+      - PORT=3000
