@@ -1,0 +1,6 @@
+services:
+  app:
+    build:
+      context: "./"
+      dockerfile: "./dockerfile"
+    image: express-js-image:2.0.0

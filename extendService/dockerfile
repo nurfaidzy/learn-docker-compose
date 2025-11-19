@@ -1,0 +1,16 @@
+FROM node:trixie
+
+ENV PORT=3000
+ENV ENV=test
+
+RUN mkdir app
+WORKDIR /app
+
+COPY index.js .
+RUN npm init -y 
+RUN npm install express
+
+EXPOSE ${PORT}
+
+CMD ["node", "index.js"]
+

@@ -1,0 +1,11 @@
+services:
+  app-dev:
+    extends:
+      file: docker-compose.yml
+      service: app
+    container_name: express-js-container-dev
+    ports:
+      - "5000:3000"
+    environment:
+      - PORT=3000
+      - ENV=development

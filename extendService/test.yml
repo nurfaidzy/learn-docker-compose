@@ -1,0 +1,11 @@
+services:
+  app-test:
+    extends:
+      file: docker-compose.yml
+      service: app
+    container_name: express-js-container-test
+    ports:
+      - "5002:3000"
+    environment:
+      - PORT=3000
+      - ENV=test

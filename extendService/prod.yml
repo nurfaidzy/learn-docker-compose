@@ -1,0 +1,11 @@
+services:
+  app-prod:
+    extends:
+      file: docker-compose.yml
+      service: app
+    container_name: express-js-container-prod
+    ports:
+      - "5001:3000"
+    environment:
+      - PORT=3000
+      - ENV=production
